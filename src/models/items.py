@@ -1,0 +1,1 @@
+#todo: add inventory, enemy loot, gear worth fighting for
