@@ -1,6 +1,5 @@
 import logging
-from src.logs.logging_config import LoggingConfig
-from src.utils import DataRepository
+
 
 # 1. SETUP LOGGING
 LoggingConfig.setup_logging()

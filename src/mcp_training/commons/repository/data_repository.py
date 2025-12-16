@@ -16,7 +16,7 @@ class DataRepository:
         self.DATA_DIR: Path = (self.BASE_DIR / "data").resolve()
         logger.info(f"DataRepository initialized. Root: {self.DATA_DIR}")
 
-    def get_data_file(self,dir_name: str, file_name: str) -> Path:
+    def get_data_file(self, dir_name: str, file_name: str) -> Path:
         return (self.DATA_DIR/ f"{dir_name}" / f"{file_name}.json").resolve()
 
     @repo_error_handling

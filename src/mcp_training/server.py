@@ -1,6 +1,5 @@
 from mcp.server.fastmcp import FastMCP
 
-import models
 from src.logs.logging_config import LoggingConfig
 
 # Initialize the Server
