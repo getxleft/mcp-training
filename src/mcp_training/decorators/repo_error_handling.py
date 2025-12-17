@@ -1,4 +1,3 @@
-#src/decorators/repo_error_handling.py
 import json
 import logging
 from functools import wraps
@@ -14,6 +13,14 @@ def repo_error_handling(function):
 
         except FileNotFoundError:
             logger.warning(f"[MISSING] {function.__name__}: File/Dir not found. Args: {args}")
+            return None
+
+        except FileExistsError:
+            logger.warning(f"[DUPLICATE] {function.__name__}: Data already exists. Args: {args}")
+            return None
+
+        except KeyError:
+            logger.warning(f"[MISSING] {function.__name__}: Args: {args}")
             return None
 
         except json.JSONDecodeError:

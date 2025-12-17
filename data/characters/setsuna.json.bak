@@ -1,6 +1,6 @@
 {
     "char_name": "Setsuna",
     "char_class": "Warrior",
-    "char_hp": 10,
+    "char_hp": "9",
     "char_weapon": "Sword"
 }

@@ -10,6 +10,7 @@ python = "^3.13"
 pydantic = "^2.12.5"
 mcp = {extras = ["cli"], version = "^1.23.3"}
 aiofiles = "^25.1.0"
+pytest = "^9.0.2"
 
 
 [build-system]

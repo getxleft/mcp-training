@@ -1,38 +1,39 @@
-
+import logging
 from pathlib import Path
 
-
+logger = logging.getLogger("Path Finder")
 
 class PathFinder:
 
     @staticmethod
-    def get_project_root():
+    def get_data_root_path() -> Path:
         current_dir = Path(__file__).resolve()
         for parent in current_dir.parents:
-            if (parent / ".gitignore").exists() or (parent / ".env").exists():
-                return parent
-        return current_dir.parent
+            data_root = parent / "data"
+            if data_root.exists():
+                return data_root.resolve()
+        return current_dir.resolve()
 
-    @staticmethod
-    def get_data_root():
-        return self.get_project_root() / "data"
-
-    def get_all_paths(self):
+    def get_all_paths(self) -> dict:
         path_vault = {}
-        data_root = self.get_data_root()
-        for category_dir in data_root.glob("*"):
-            if category_dir.is_dir():
-                for json_file in category_dir.glob("*.json"):
-                    key = f"{category_dir.name}/{json_file.name}"
-                    path_vault[key] = json_file
-        return path_vault
+        data_root = self.get_data_root_path()
+
+        if not data_root.exists():
+            return {}
+
+        for category in data_root.glob("*"):
+            if category.is_dir():
+                for file in category.glob("*.json"):
+                    key = f"{category.name}/{file.name}"
+                    path_vault[key] = file
+        return dict(sorted(path_vault.items()))
 
 
 
 
 
 if __name__ == "__main__":
-    root = PathFinder.get_project_root()
-    print(f"📍 Project Root detected at: {root}")
+    root = PathFinder.get_data_root_path()
+    print(f"Project Root detected at: {root}")
     vault = PathFinder().get_all_paths()
     print(vault)
